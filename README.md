@@ -98,7 +98,7 @@ To use the main program, `app.py` :
 
 5. After the game, feel free to use SAVE option for postgame analysis.
 
-**NOTE : ** If `BOARD_CORNERS` is set to None, automatic (neural-network-based) chessboard detection is used, and each moves takes at most 8 seconds to register with Intel Core i7.
+**NOTE:** If `BOARD_CORNERS` is set to None, automatic (neural-network-based) chessboard detection is used, and each moves takes at most 8 seconds to register with Intel Core i7.
 ## **TECHNICAL DETAILS**
 
 The figure below shows a high-level flow diagram for the signal-processing workflow. Models details are mentioned in this [paper](https://arxiv.org/abs/2012.06858):
