@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITIZATION</title>
+    <style>
+        body {
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around; 
+            width: 80%; 
+            max-width: 1200px; 
+            padding: 20px;
+            background-color: #74F0ED;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for container */
+            overflow: hidden; 
+            height: 50%;
+        }
+
+        .column {
+            flex: 1; /* Each column takes equal width */
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: x-large;
+            text-shadow: 4px 4px 4px #EA445A,  2px -2px 2px #74F0ED;
+        }
+
+        h2 {            
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: xx-large;
+            text-shadow: 4px 4px 4px #EA445A,  2px -2px 2px #74F0ED;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%; /* Input width fills the column */
+            box-sizing: border-box; /* Include padding in width calculation */
+            padding: 8px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%; /* Button width fills the column */
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            font-size: 17px;
+            margin-top: 10px;
+        }
+
+        .button-33 {
+            background-color: #c2fbd7;
+            border-radius: 100px;
+            box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+            color: green;
+            cursor: pointer;
+            display: inline-block;
+            font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+            padding: 7px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 250ms;
+            border: 0;
+            width: 15vw;
+            height: 3vw;
+            font-size: 16px;
+            font-weight: bold;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-33:hover {
+            box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+            transform: scale(1.05) rotate(-1deg);
+        }
+        #pgnInput{
+            border-radius: 10px;
+            font-size: large;
+            font-weight: bold;
+        }
+        #fenInput{
+            border-radius: 10px;
+            font-size: medium;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>DIGITIZATION</h2>
+
+<div class="container">
+    <div class="column">
+        <h1>From FEN</h1>
+        <form id="fenForm" action="/analyze_fen" method="post" onsubmit="return validateFEN()">
+            <input type="text" placeholder=" Enter FEN..." id="fenInput" name="fenInput" maxlength="100"><br>
+            <div class="error-message" id="fenErrorMessage" style="display: none;"></div> 
+            <button type="submit" class="button-33">ANALYSE FEN</button>
+        </form>
+    </div>
+
+    <div class="column">
+        <h1>From PGN</h1>
+        <form id="pgnForm" action="/analyze_pgn" method="post" onsubmit="return validatePGN()">
+            <textarea id="pgnInput" placeholder=" Enter PGN..." name="pgnInput" rows="8" style="width: 400px; height: 150px; resize: none;" maxlength="1000"></textarea><br>
+            <div class="error-message" id="pgnErrorMessage" style="display: none;"></div> <!-- Error message container -->
+            <button type="submit" class="button-33">ANALYSE PGN</button>
+        </form>
+    </div>
+</div>
+
+<form action="/livedigitization" method="post">
+    <button type="submit" class="button-33">LIVE DIGITIZATION</button>
+</form>
+
+<script>
+    
+    function validatePGN() {
+        const pgnInput = document.getElementById('pgnInput').value.trim();
+        const errorContainer = document.getElementById('pgnErrorMessage');
+
+        if (!pgnInput) {
+            errorContainer.textContent = 'No PGN input provided.';
+            errorContainer.style.display = 'block'; // Display error message
+            return false; // Prevent form submission
+        } else {
+            errorContainer.style.display = 'none'; // Hide error message if input is valid
+            return true; // Allow form submission
+        }
+    }
+</script>
+
+</body>
+</html>

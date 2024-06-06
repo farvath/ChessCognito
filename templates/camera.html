@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjust Camera</title>
+    <style>
+        body {
+            background-color: black;
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center;
+            background-attachment: fixed; /* Fix the background image */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px; /* Add top margin for spacing */
+            color: white;
+            margin-bottom: 5%;
+        }
+
+        video {
+            
+            width: 640px; /* Set your desired width */
+            height: 480px; /* Set your desired height */
+            border: 5px solid rgb(255, 255, 255); /* Add a border around the video */
+            border-radius: 10px; /* Add border radius for rounded corners */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Test Camera</h1>
+</div>
+
+<video id="camera" autoplay></video>
+
+<script>
+  
+   const video = document.getElementById('camera');
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        video.srcObject = stream;
+
+        // Ensure the video reflects the transformation
+        video.addEventListener('loadedmetadata', () => {
+            // Check if video is mirrored and adjust if necessary
+            const track = stream.getVideoTracks()[0];
+            const settings = track.getSettings();
+            if (settings.facingMode === 'user') {
+                video.style.transform = 'scaleX(-1)';
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error accessing camera:', error);
+    });
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Digitization</title>
+    <style>
+        body {
+            background-color: rgb(0, 0, 0);
+            height: 95vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; 
+        }
+        .maincontainer
+        {
+           
+            width: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+            display: flex;
+            margin-top: 1%;
+            height: 80%;
+        }
+        .container {
+           
+            display: flex;
+            flex-direction: column;
+            width: 33%;     
+            
+        }
+
+        .container2 {
+               
+                display: flex;
+                flex-direction: column;
+                width: 40%;   
+                height: 80%;  
+                margin-right: 10px; 
+                overflow-y: scroll;
+                overflow-x: hidden;
+                color: antiquewhite;
+                border: 1px solid antiquewhite;
+            }
+
+            .container3 {
+               
+                display: flex;
+                flex-direction: column;
+                width: 27%; 
+                height: 80%;     
+                margin-right: 10px; 
+                overflow-y: scroll;
+                overflow-x: hidden;
+                color: antiquewhite;
+                border: 1px solid antiquewhite;
+            }
+
+        #timerContainer, #videoContainer {
+            width: 100%;
+            flex: 1;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #timerContainer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        .whitetimer, .blacktimer {
+            font-size: 54px;
+            font-weight: bolder;
+            border-radius: 10%;
+            margin-bottom: 10px;
+        }
+
+        .whitetimer {
+            background-color: rgb(253, 250, 245);
+            color: rgb(27, 27, 27);
+        }
+
+        .blacktimer {
+            background-color: black;
+            color: azure;
+            border: 1px solid whitesmoke;
+        }
+
+        .timer_image {
+            width: 70px; 
+            height: 65px;
+            border-radius: 20%;
+            border: 1px solid whitesmoke;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border: 2px solid whitesmoke;
+            
+        }
+
+        #timeUpMessage {
+            font-size: 36px;
+            font-weight: bold;
+            color: red;
+            text-align: center;
+        }
+
+        .button-33 {
+            background-color: #c2fbd7;
+            border-radius: 100px;
+            box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+            color: green;
+            cursor: pointer;
+            font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+            padding: 7px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 250ms;
+            border: 0;
+            width: 11vw;
+            height: 2vw;
+            padding: 2px;
+            margin: 5px;
+            font-size: 24px;
+            font-weight: bold;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-33:hover {
+            box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        #pgnForm{
+            display: flex;
+            justify-content: end;
+            margin-right: 5%;
+            
+        }
+
+        h1 {
+            color: antiquewhite;
+            font-size: 45px;
+            display: flex;
+           justify-content: space-around;
+            text-shadow: 4px 4px 4px #EA445A,  2px -2px 2px #74F0ED;
+        }
+
+               
+        #positionSelect, #timerDurationSelect {
+            margin-left: 5px;
+            background-color: #c2fbd7;
+            border-radius: 100px;
+            box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+            color: green;
+            cursor: pointer;
+            font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+            padding: 1px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 250ms;
+            border: 0;
+            width: 12vw;
+            height: 2vw;
+            font-size: 16px;
+            font-weight: bold;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        
+
+        
+        #positionSelect option , #timerDurationSelect option {
+            color: green;
+            background-color: #c2fbd7;
+            font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            text-align: center;
+        }
+
+       
+        #positionSelect option:hover {
+            background-color:#C2fbd7;
+        }
+        #timerDurationSelect option:hover {
+            background-color:#C2fbd7;
+        }
+
+        .Timesetandpositionset{
+            display: flex;
+            justify-content: space-around;
+            margin: 3px;
+        }
+      
+    </style>
+</head>
+<body>
+    <h1>Live Digitization </h1>
+    <div class="maincontainer">
+        <div class="container">
+            <div class="Timesetandpositionset">
+                <select id="positionSelect">
+                    <option value="BR">Bottom-Right (BR)</option>
+                    <option value="BL">Bottom-Left (BL)</option>
+                    <option value="TF">Top-Right (TF)</option>
+                    <option value="TR">Top-Left (TR)</option>
+                </select>
+                <select id="timerDurationSelect">
+                    <option value="600">10 minutes</option>
+                    <option value="900">15 minutes</option>
+                    <option value="1200">20 minutes</option>
+                    <option value="1800">30 minutes</option>
+                </select>
+            </div>
+            
+                        
+            <div id="timerContainer">
+                <div class="whitetimer" id="whiteTimer">10:00</div>
+                <img src="../static/timer_image.jpg" class="timer_image">
+                <div class="blacktimer" id="blackTimer">10:00</div>  
+            </div>
+                
+            <div id="videoContainer" style="display: none;">
+                <video id="videoFeed" autoplay></video>
+                <div id="timeUpMessage" style="display: none;">Time's up!</div>
+            </div>
+            <button id="readyButton" class="button-33" onclick="startGame()">Ready</button>
+        </div>
+    
+       
+        <div class="container2">
+            <h2>FEN</h2>
+            <ol id="fenList"> </ol>
+        </div>
+    
+        <div class="container3">
+            <h2>PGN</h2>
+            <span id="pgnOutput"></span>
+        </div>
+    </div>
+
+    <form id="pgnForm" action="/analyze_pgn" method="post">
+        <input type="hidden" id="pgnInput" name="pgnInput">
+        <div class="error-message" id="pgnErrorMessage" style="display: none;"></div>
+        <button type="button" class="button-33" id="savePgnButton">Save PGN</button>
+        <button type="submit" class="button-33">Analyse</button>
+        
+    </form>
+    
+
+    
+
+
+    
+    <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                const pgnOutput = document.getElementById('pgnOutput');
+                const pgnInput = document.getElementById('pgnInput');
+                const pgnForm = document.getElementById('pgnForm');
+
+                pgnForm.addEventListener('submit', function(event) {
+                    event.preventDefault();  // Prevent default form submission
+
+                    // Get the text content from the pgnOutput span
+                    const pgnContent = pgnOutput.textContent.trim();
+
+                    // Set the value of the hidden input field to the extracted PGN content
+                    pgnInput.value = pgnContent;
+
+                    // Submit the form
+                    pgnForm.submit();
+                });
+            });
+
+            
+
+         async function fetchFenAndConvertToPgn() {
+            try {
+                // Fetch existing FEN list from backend
+                const fenListResponse = await fetch('/get_fen_list');
+                const { fen_list } = await fenListResponse.json();
+
+                // Call the backend to convert FEN list to PGN
+                const pgnResponse = await fetch('/convert_fen_to_pgn', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ fen_list })
+                });
+
+                const { pgn } = await pgnResponse.json();
+
+                // Update the pgnOutput span with the fetched PGN data
+                const pgnOutput = document.getElementById('pgnOutput');
+                if (pgn) {
+                    pgnOutput.textContent = pgn;
+                } else {
+                    pgnOutput.textContent = "Processing PGN.......";
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                const pgnOutput = document.getElementById('pgnOutput');
+                pgnOutput.textContent = "An error occurred while fetching or processing data.";
+            }
+        }
+
+// Event listener for keydown event (Space key)
+document.addEventListener('keydown', async function(event) {
+    if (event.code === 'Space') {
+        
+        switchTurn(); 
+        captureAndProcessImage(); 
+        await fetchFenAndConvertToPgn(); 
+        await fetchFenList();
+    }
+});
+
+        async function fetchFenList() {
+            try {
+                const response = await fetch('/get_fen_list');
+                const data = await response.json();
+                const fenList = data.fen_list;
+
+                const fenListContainer = document.getElementById('fenList');
+                fenListContainer.innerHTML = ''; // Clear previous content
+
+                fenList.forEach(fen => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = fen;
+                    fenListContainer.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error fetching FEN list:', error);
+            }
+        }
+
+        
+    
+        let timers = {
+            'white': 0,
+            'black': 0
+        };
+        let currentTurn = 'white';
+        let timerInterval;
+        let gameStarted = false;
+    
+        function updateTimerDisplay() {
+            document.getElementById('whiteTimer').textContent = `${formatTime(timers['white'])}`;
+            document.getElementById('blackTimer').textContent = `${formatTime(timers['black'])}`;
+        }
+    
+        function formatTime(timeInSeconds) {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+    
+        function switchTurn() {
+            currentTurn = (currentTurn === 'white') ? 'black' : 'white';
+            updateTimerDisplay();
+            startTimer(); // Start timer for the new turn
+        }
+    
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timers[currentTurn]--;
+                updateTimerDisplay();
+                if (timers[currentTurn] <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('videoFeed').style.display = 'none';
+                    document.getElementById('timeUpMessage').style.display = 'block';
+                    return;
+                }
+            }, 1000);
+        }
+    
+        async function startGame() {
+                if (!gameStarted) {
+                    gameStarted = true;
+                    document.getElementById('videoContainer').style.display = 'block';
+                    document.getElementById('readyButton').style.display = 'none';
+                    
+                    // Get selected timer duration value
+                    const timerDurationSelect = document.getElementById('timerDurationSelect');
+                    const selectedDuration = parseInt(timerDurationSelect.value);
+
+                    // Update timers object with the selected duration for both white and black players
+                    timers['white'] = selectedDuration;
+                    timers['black'] = selectedDuration;
+
+                    // Update timer display on the webpage
+                    updateTimerDisplay();
+
+                    initializeCamera();
+                    startTimer();
+                    fetchFenList();
+                    await fetchFenAndConvertToPgn();
+                }
+            }
+
+    
+        async function initializeCamera() {
+        const constraints = { video: true };
+        const videoElement = document.getElementById('videoFeed');
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            videoElement.srcObject = stream;
+            videoElement.play(); // Start video playback
+            
+        } catch (error) {
+            console.error('Error accessing camera:', error);
+        }
+    }
+
+    
+        async function captureAndProcessImage() {
+            const videoElement = document.getElementById('videoFeed');
+            const canvas = document.createElement('canvas');
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+            const imageDataUrl = canvas.toDataURL('image/jpeg');
+
+            // Get selected position value
+            const positionSelect = document.getElementById('positionSelect');
+            const a1_pos = positionSelect.value;
+            console.log('Selected a1_pos:', a1_pos);
+
+            // Send captured frame and position to backend for processing
+            const response = await fetch('/process_image', {
+                method: 'POST',
+                body: JSON.stringify({ image: imageDataUrl, a1_pos }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+
+            // Check if the response contains a detected move
+            const detectedMove = data.move;
+
+            if (detectedMove) {
+                alert(`Detected Move: ${detectedMove}`);
+            } else {
+                console.log('No move detected.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const pgnOutput = document.getElementById('pgnOutput');
+            const pgnInput = document.getElementById('pgnInput');
+            const pgnForm = document.getElementById('pgnForm');
+
+            // Event listener for submitting the form
+            pgnForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get the text content from the pgnOutput span
+                const pgnContent = pgnOutput.textContent.trim();
+
+                // Set the value of the hidden input field to the extracted PGN content
+                pgnInput.value = pgnContent;
+
+                // Submit the form
+                pgnForm.submit();
+            });
+
+    // Event listener for saving PGN content as a text file
+    const savePgnButton = document.getElementById('savePgnButton');
+            savePgnButton.addEventListener('click', function() {
+                const pgnContent = pgnOutput.textContent.trim();
+
+                // Create a Blob containing the PGN content
+                const blob = new Blob([pgnContent], { type: 'text/plain' });
+
+                // Create a temporary <a> element to trigger download
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'chess_game.pgn'; // Specify filename for download
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+        });
+
+
+
+    </script>
+    
+</body>
+</html>

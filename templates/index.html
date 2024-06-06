@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    
+    <style>
+        body {
+            background-image: url(/static/background.jpeg);
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Ensure full viewport height */
+            
+        }
+
+        h1 {
+            color: white;
+            padding-bottom:  5%;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+
+        div {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        form {
+            margin-top: 15px;
+        }
+        .glow-on-hover {
+                width: 220px;
+                height: 50px;
+                border: 5px;
+                outline: none;
+                color: white;
+                cursor: pointer;
+                position: relative;
+                z-index: 0;
+                border-radius: 10px;
+                font-weight: bolder;
+                font-size: larger;
+                border-color: #ffffff;
+            }
+
+            .glow-on-hover:before {
+                content: '';
+                background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+                position: absolute;
+                top: -2px;
+                left:-2px;
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(5px);
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                animation: glowing 20s linear infinite;
+                opacity: 0;
+                transition: opacity .1s ease-in-out;
+                border-radius: 10px;
+            }
+
+            .glow-on-hover:active {
+                color: #ffffff
+            }
+
+            .glow-on-hover:active:after {
+                background: transparent;
+            }
+
+            .glow-on-hover:hover:before {
+                opacity: 1;
+            }
+
+            .glow-on-hover:after {
+                z-index: -1;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #000;
+                left: 0;
+                top: 0;
+                border-radius: 10px;
+            }
+
+            @keyframes glowing {
+                0% { background-position: 0 0; }
+                50% { background-position: 400% 0; }
+                100% { background-position: 0 0; }
+            }
+    </style>
+</head>
+<body>
+    <h1>ChessCognito : Digitizing Chess Game</h1>
+
+    <div>
+        <form action="/adjustcamera" method="post">
+            <button type="submit" class="glow-on-hover">TEST CAMERA</button>
+        </form>
+        <form action="/digitize" method="post">
+            <button type="submit" class="glow-on-hover">DIGITIZE</button>
+        </form>
+    </div>
+
+    <script>
+        // You can add JavaScript code here if needed
+    </script>
+</body>
+
+
+
+</html>
