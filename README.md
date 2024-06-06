@@ -104,8 +104,8 @@ To use the main program, `app.py` :
 The figure below shows a high-level flow diagram for the signal-processing workflow. Models details are mentioned in this [paper](https://arxiv.org/abs/2012.06858):
 
 !["FLOW DIAGRAM"](https://github.com/farvath/ChessCognito/blob/main/flow-diagram.jpg)
-## **DEMONSTRATION**
-
+## **SETUP**
+!["SETUP"](https://github.com/farvath/ChessCognito/blob/main/setup.jpg)
 
 ## **DEMONSTRATION**
 
