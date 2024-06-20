@@ -109,7 +109,7 @@ The figure below shows a high-level flow diagram for the signal-processing workf
 <img src="https://github.com/farvath/ChessCognito/blob/main/setup.jpg" width="400px" height="400px" alt="alt text">
 
 ## **DEMONSTRATION**
-[https://github.com/farvath/ChessCognito/blob/main/demo.jpg](https://youtu.be/DUXy-wxAJ5M)
+(https://github.com/farvath/ChessCognito/blob/main/demo.jpg)(https://youtu.be/DUXy-wxAJ5M)
 
 ## **ACKNOWLEDGEMENTS**
 
